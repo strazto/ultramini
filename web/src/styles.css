@@ -313,7 +313,7 @@ input {
   outline: 0;
   text-align: center;
   text-transform: uppercase;
-  caret-color: #111;
+  caret-color: transparent;
   -webkit-appearance: none;
   appearance: none;
 }
