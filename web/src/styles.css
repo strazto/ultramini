@@ -1,0 +1,442 @@
+:root {
+  color: #111;
+  background: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --blue: #91bdf4;
+  --blue-active: #a6d4f6;
+  --blue-soft: #d7ebfb;
+  --yellow: #ffd500;
+  --line: #dcdcdc;
+  --ink: #111;
+  --wrong: #f27575;
+  --right: #89d28b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-width: 320px;
+}
+
+button {
+  color: inherit;
+  font: inherit;
+}
+
+.app {
+  min-height: 100vh;
+  background: #fff;
+}
+
+.top-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+
+.icon-button,
+.gear-button,
+.round-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menu-button {
+  position: absolute;
+  left: 18px;
+  width: 34px;
+  height: 34px;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.menu-button span {
+  width: 22px;
+  height: 3px;
+  border-radius: 3px;
+  background: #111;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 27px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.wordmark-mark {
+  display: inline-grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border-radius: 50%;
+  background: #111;
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 14px;
+}
+
+.start-screen {
+  min-height: 100vh;
+  background: #fff;
+}
+
+.start-panel {
+  min-height: calc(100vh - 48px);
+  padding: clamp(90px, 16vh, 130px) 20px 80px;
+  background: var(--blue);
+}
+
+.start-copy {
+  display: flex;
+  max-width: 520px;
+  margin: 0 auto;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.tiny-grid-icon {
+  display: grid;
+  width: 64px;
+  height: 64px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  overflow: hidden;
+  border: 4px solid #111;
+  border-radius: 7px;
+  background: #fff;
+}
+
+.tiny-grid-icon span {
+  border-right: 3px solid #111;
+  border-bottom: 3px solid #111;
+}
+
+.tiny-grid-icon span:nth-child(2),
+.tiny-grid-icon span:nth-child(4) {
+  border-right: 0;
+}
+
+.tiny-grid-icon span:nth-child(3),
+.tiny-grid-icon span:nth-child(4) {
+  border-bottom: 0;
+}
+
+.tiny-grid-icon .black-square {
+  background: #111;
+}
+
+.start-copy h1 {
+  margin: 18px 0 8px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(33px, 6vw, 38px);
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+.start-copy p {
+  margin: 0 0 22px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 26px;
+  line-height: 1.25;
+}
+
+.play-button {
+  width: min(100%, 257px);
+  min-height: 44px;
+  border: 0;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.play-button:hover,
+.play-button:focus-visible {
+  background: #2a2a2a;
+}
+
+.date-block {
+  display: flex;
+  margin-top: 31px;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.date-block strong {
+  font-size: 16px;
+}
+
+.solve-screen {
+  min-height: 100vh;
+  background: #fff;
+}
+
+.solve-toolbar {
+  display: grid;
+  height: 62px;
+  grid-template-columns: 76px 110px repeat(4, minmax(74px, 1fr)) 48px 48px;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.gear-button {
+  height: 100%;
+  border-right: 1px solid var(--line);
+  background: #f7f7f7;
+  font-size: 24px;
+}
+
+.timer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 16px;
+}
+
+.timer span {
+  color: #b8b8b8;
+  font-size: 13px;
+}
+
+.toolbar-button {
+  height: 100%;
+  border: 0;
+  background: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.toolbar-button:hover,
+.toolbar-button:focus-visible,
+.round-icon:hover,
+.round-icon:focus-visible {
+  background: #f1f1f1;
+}
+
+.round-icon {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  border: 3px solid #111;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.round-icon.pencil {
+  border: 0;
+  font-size: 30px;
+}
+
+.solve-layout {
+  display: grid;
+  max-width: 980px;
+  margin: 0 auto;
+  grid-template-columns: minmax(270px, 360px) minmax(300px, 1fr);
+  gap: 24px;
+  padding: 10px 20px 48px;
+}
+
+.board-column {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.selected-clue {
+  display: grid;
+  min-height: 60px;
+  margin-bottom: 12px;
+  grid-template-columns: 48px 1fr;
+  align-items: center;
+  background: var(--blue-soft);
+  font-size: 16px;
+}
+
+.selected-clue strong {
+  text-align: center;
+}
+
+.crossword-cell {
+  position: relative;
+  display: grid;
+  width: min(100%, 333px);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 2px solid #111;
+  background: var(--yellow);
+  cursor: pointer;
+}
+
+.crossword-cell:focus-visible {
+  outline: 4px solid #111;
+  outline-offset: 4px;
+}
+
+.crossword-cell.is-correct {
+  background: var(--right);
+}
+
+.crossword-cell.is-incorrect {
+  background: var(--wrong);
+}
+
+.cell-number {
+  position: absolute;
+  top: 9px;
+  left: 11px;
+  font-size: clamp(18px, 4vw, 28px);
+  line-height: 1;
+}
+
+.cell-letter {
+  font-size: clamp(96px, 23vw, 164px);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.status {
+  min-height: 24px;
+  margin: 14px 0 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.clues-panel {
+  display: flex;
+  min-height: 430px;
+  padding-right: 14px;
+  flex-direction: column;
+  gap: 30px;
+  border-right: 1px solid var(--line);
+}
+
+.clues-panel h2 {
+  margin: 8px 0 7px;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.clue-row {
+  display: grid;
+  width: 100%;
+  min-height: 30px;
+  grid-template-columns: 36px 1fr;
+  align-items: center;
+  border: 0;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+}
+
+.clue-row strong {
+  text-align: center;
+}
+
+.clue-row.is-active {
+  background: var(--blue-active);
+}
+
+.clue-row.deadpan {
+  border-left: 10px solid var(--blue-active);
+}
+
+@media (max-width: 720px) {
+  .wordmark {
+    font-size: 22px;
+  }
+
+  .solve-toolbar {
+    height: auto;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .gear-button,
+  .timer,
+  .toolbar-button,
+  .round-icon {
+    min-height: 48px;
+  }
+
+  .gear-button {
+    border-right: 0;
+  }
+
+  .round-icon {
+    width: 34px;
+    height: 34px;
+    border-width: 2px;
+    font-size: 17px;
+  }
+
+  .round-icon.pencil {
+    font-size: 25px;
+  }
+
+  .solve-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 10px 16px 36px;
+  }
+
+  .crossword-cell {
+    width: min(100%, 320px);
+    align-self: center;
+  }
+
+  .clues-panel {
+    min-height: auto;
+    padding-right: 0;
+    border-right: 0;
+  }
+}
+
+@media (max-width: 430px) {
+  .start-panel {
+    padding-top: 84px;
+  }
+
+  .start-copy p {
+    font-size: 23px;
+  }
+
+  .solve-toolbar {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .toolbar-button {
+    font-size: 14px;
+  }
+}
