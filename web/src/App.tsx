@@ -316,7 +316,7 @@ function SolvingScreen({
             <h2>DOWN</h2>
             <button className="clue-row deadpan" type="button">
               <strong>1</strong>
-              <span>There is no down.</span>
+              <span>See 1 across</span>
             </button>
           </section>
         </aside>
