@@ -181,7 +181,7 @@ function StartScreen({ onPlay, puzzle }: StartScreenProps) {
           </button>
           <div className="date-block">
             <strong>{puzzle.dateLabel}</strong>
-            <span>By Matt Webb&nbsp;&nbsp;•&nbsp;&nbsp;Edited by Nobody</span>
+            <span>By Matthew Strasiotto&nbsp;&nbsp;•&nbsp;&nbsp;Edited by Nobody</span>
           </div>
         </div>
       </div>
