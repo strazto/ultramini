@@ -1,3 +1,4 @@
+import type { JSX } from "preact";
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -65,7 +66,7 @@ export function App() {
   const [entry, setEntry] = useState("");
   const [elapsed, setElapsed] = useState(0);
   const [checkState, setCheckState] = useState<CheckState>("idle");
-  const cellRef = useRef<HTMLButtonElement>(null);
+  const cellRef = useRef<HTMLInputElement>(null);
 
   const isSolving = mode === "solving";
   const isSolved = entry === puzzle.answer;
@@ -117,28 +118,21 @@ export function App() {
     cellRef.current?.focus();
   }
 
-  function handleKeyDown(event: KeyboardEvent) {
-    if (!isSolving) {
-      return;
-    }
-
-    if (/^[a-z]$/i.test(event.key)) {
-      event.preventDefault();
-      setLetter(event.key);
-      return;
-    }
-
+  function handleCellKeyDown(event: JSX.TargetedKeyboardEvent<HTMLInputElement>) {
     if (event.key === "Backspace" || event.key === "Delete") {
+      setCheckState("idle");
+      return;
+    }
+
+    if (event.key.length === 1 && !/^[a-z]$/i.test(event.key)) {
       event.preventDefault();
-      clearEntry();
     }
   }
 
-  useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isSolving, entry, puzzle.answer]);
+  function handleCellInput(event: JSX.TargetedInputEvent<HTMLInputElement>) {
+    const nextLetter = event.currentTarget.value.replace(/[^a-z]/gi, "").slice(-1);
+    setLetter(nextLetter);
+  }
 
   return (
     <main className="app">
@@ -155,6 +149,8 @@ export function App() {
           onReveal={revealAnswer}
           puzzle={puzzle}
           cellRef={cellRef}
+          onCellInput={handleCellInput}
+          onCellKeyDown={handleCellKeyDown}
         />
       )}
     </main>
@@ -217,11 +213,13 @@ function TinyGridIcon() {
 }
 
 type SolvingScreenProps = {
-  cellRef: preact.RefObject<HTMLButtonElement>;
+  cellRef: preact.RefObject<HTMLInputElement>;
   checkState: CheckState;
   elapsed: number;
   entry: string;
   isSolved: boolean;
+  onCellInput: (event: JSX.TargetedInputEvent<HTMLInputElement>) => void;
+  onCellKeyDown: (event: JSX.TargetedKeyboardEvent<HTMLInputElement>) => void;
   onCheck: () => void;
   onClear: () => void;
   onReveal: () => void;
@@ -234,6 +232,8 @@ function SolvingScreen({
   elapsed,
   entry,
   isSolved,
+  onCellInput,
+  onCellKeyDown,
   onCheck,
   onClear,
   onReveal,
@@ -284,15 +284,25 @@ function SolvingScreen({
             <span>{puzzle.clue}</span>
           </div>
 
-          <button
-            ref={cellRef}
-            className={cellClasses}
-            type="button"
-            aria-label={`1 across, ${puzzle.clue}`}
-          >
+          <label className="crossword-cell-shell">
             <span className="cell-number">1</span>
-            <span className="cell-letter">{entry}</span>
-          </button>
+            <input
+              ref={cellRef}
+              aria-label={`1 across, ${puzzle.clue}`}
+              autoCapitalize="characters"
+              autoComplete="off"
+              autoCorrect="off"
+              className={cellClasses}
+              inputMode="text"
+              maxLength={1}
+              onInput={onCellInput}
+              onKeyDown={onCellKeyDown}
+              pattern="[A-Za-z]"
+              spellcheck={false}
+              type="text"
+              value={entry}
+            />
+          </label>
 
           <p className="status" aria-live="polite">
             {isSolved
