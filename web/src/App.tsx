@@ -306,7 +306,7 @@ function SolvingScreen({
 
           <p className="status" aria-live="polite">
             {isSolved
-              ? "Solved. Somehow."
+              ? "Solved."
               : checkState === "incorrect"
                 ? "Not quite. The entire crossword remains unsolved."
                 : "Type one letter."}
